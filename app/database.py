@@ -1,33 +1,26 @@
-from flask import Blueprint, render_template, request, jsonify
-from app.database import Database
-from app.encryption import Encryption
+import json
+import os
 
-main = Blueprint('main', __name__)
-db = Database("passwords.db")
-encryption = Encryption()
+class Database:
+    def __init__(self, filename):
+        self.filename = filename
+        if not os.path.exists(self.filename):
+            with open(self.filename, "w") as file:
+                json.dump({}, file)
 
-@main.route('/')
-def home():
-    return render_template('index.html')
+    def save(self, service, username, password):
+        data = self._load_data()
+        data[service] = {"username": username, "password": password}
+        self._save_data(data)
 
-@main.route('/store', methods=['POST'])
-def store_password():
-    data = request.get_json()
-    service = data['service']
-    username = data['username']
-    password = data['password']
+    def get(self, service):
+        data = self._load_data()
+        return data.get(service)
 
-    encrypted_password = encryption.encrypt(password)
-    db.save(service, username, encrypted_password)
-    return jsonify({"message": "Password stored successfully!"})
+    def _load_data(self):
+        with open(self.filename, "r") as file:
+            return json.load(file)
 
-@main.route('/retrieve', methods=['POST'])
-def retrieve_password():
-    data = request.get_json()
-    service = data['service']
-
-    record = db.get(service)
-    if record:
-        decrypted_password = encryption.decrypt(record['password'])
-        return jsonify({"username": record['username'], "password": decrypted_password})
-    return jsonify({"error": "No credentials found for the requested service"}), 404
+    def _save_data(self, data):
+        with open(self.filename, "w") as file:
+            json.dump(data, file, indent=4)
