@@ -1,26 +1,14 @@
 import json
-import os
+import threading
 
-class Database:
-    def __init__(self, filename):
-        self.filename = filename
-        if not os.path.exists(self.filename):
-            with open(self.filename, "w") as file:
-                json.dump({}, file)
+db_lock = threading.Lock()
 
-    def save(self, service, username, password):
-        data = self._load_data()
-        data[service] = {"username": username, "password": password}
-        self._save_data(data)
+def read_database(db_path):
+    with db_lock:
+        with open(db_path, 'r') as db_file:
+            return json.load(db_file)
 
-    def get(self, service):
-        data = self._load_data()
-        return data.get(service)
-
-    def _load_data(self):
-        with open(self.filename, "r") as file:
-            return json.load(file)
-
-    def _save_data(self, data):
-        with open(self.filename, "w") as file:
-            json.dump(data, file, indent=4)
+def write_database(db_path, data):
+    with db_lock:
+        with open(db_path, 'w') as db_file:
+            json.dump(data, db_file)
