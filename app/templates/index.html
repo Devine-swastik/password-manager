@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Manager</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script defer src="/static/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Password Manager</h1>
+        <div class="form">
+            <h2>Store Password</h2>
+            <input type="text" id="store-service" placeholder="Service">
+            <input type="text" id="store-username" placeholder="Username">
+            <input type="password" id="store-password" placeholder="Password">
+            <button id="store-btn">Store</button>
+        </div>
+        <div class="form">
+            <h2>Retrieve Password</h2>
+            <input type="text" id="retrieve-service" placeholder="Service">
+            <button id="retrieve-btn">Retrieve</button>
+            <div id="result"></div>
+        </div>
+    </div>
+</body>
+</html>
