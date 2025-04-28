@@ -1,4 +1,17 @@
+# Python cache files
 __pycache__/
 *.pyc
+
+# Environment files
+.env
+
+# Database and keys
 passwords.db
 key.key
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
