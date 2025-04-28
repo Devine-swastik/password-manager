@@ -1,17 +1,40 @@
-# Python cache files
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
 
-# Environment files
+# C extensions
+*.so
+
+# Environments
 .env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
-# Database and keys
+# Database and Keys
 passwords.db
 key.key
 
-# IDE files
+# Flask cache and logs
+instance/
+*.log
+
+# Packaging
+*.egg
+*.egg-info/
+dist/
+build/
+*.wheel
+
+# IDE or editor specific files
 .vscode/
 .idea/
 
-# OS files
+# Operating system files
 .DS_Store
+Thumbs.db
