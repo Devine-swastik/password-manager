@@ -1,42 +1,50 @@
 # Password Manager
 
-A simple **web-based password manager** built with Python’s **Flask** framework. This project is designed to securely store passwords using encryption and provide an easy-to-use web interface.
+A secure password manager built with Flask.
 
 ## Features
-- **Password Storage**: Store usernames and passwords for different services.
-- **Password Retrieval**: Retrieve stored passwords securely.
-- **Encryption**: Uses AES encryption with `cryptography` for secure password management.
-- **Responsive Web Interface**: Built with Flask and customizable via CSS and JavaScript.
+- Encrypt and store passwords
+- Simple and intuitive UI
+- Lightweight and fast
 
-## Installation and Setup
-### Prerequisites
-- **Python 3.9+**
-- **Pip** (Python package manager)
-
-### Steps
+## Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-username>/password-manager.git
+   git clone https://github.com/Devine-swastik/password-manager.git
    cd password-manager
    ```
 
-2. Install the dependencies:
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # For Linux/Mac
+   venv\Scripts\activate     # For Windows
+   ```
+
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Run the application:
-   ```bash
-   python main.py
+4. Create a `.env` file:
+   ```
+   SECRET_KEY=your-secret-key
+   DATABASE_PATH=path/to/passwords.db
    ```
 
-4. Open your browser and navigate to:
+5. Run the app:
+   ```bash
+   flask run
    ```
-   http://127.0.0.1:5000
-   ```
+
+## Testing
+Run unit tests:
+```bash
+python -m unittest discover
+```
 
 ## Deployment
-You can deploy this project to any hosting platform that supports Python and Flask.
-
-## License
-This project is licensed under the MIT License.
+Deploy to Heroku:
+```bash
+git push heroku main
+```
