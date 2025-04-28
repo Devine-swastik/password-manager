@@ -1,11 +1,11 @@
 from flask import Flask
+from dotenv import load_dotenv
+import os
 
-def create_app():
-    app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'your_secret_key'
+load_dotenv()  # Load variables from a .env file into environment variables
 
-    # Import and register routes
-    from app.routes import main
-    app.register_blueprint(main)
+app = Flask(__name__)
+app.secret_key = os.getenv("SECRET_KEY")  # Load secret key from environment variables
 
-    return app
+# Example usage
+DATABASE_PATH = os.getenv("DATABASE_PATH", "passwords.db")  # Default to 'passwords.db'
